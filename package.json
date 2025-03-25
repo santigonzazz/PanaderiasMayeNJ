@@ -1,0 +1,27 @@
+{
+  "name": "panaderiasmayenj",
+  "version": "1.0.0",
+  "description": "Proyecto formativo Sena NodeJS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/santigonzazz/PanaderiasMayeNJ.git"
+  },
+  "keywords": [
+    "API",
+    "proyecto",
+    "CRUD"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/santigonzazz/PanaderiasMayeNJ/issues"
+  },
+  "homepage": "https://github.com/santigonzazz/PanaderiasMayeNJ#readme",
+  "dependencies": {
+    "mongoose": "^8.13.0"
+  }
+}
