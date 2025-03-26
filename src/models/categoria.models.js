@@ -3,11 +3,11 @@ const mongoose = require("../config/database");
 const schemaCategoria = new mongoose.Schema({
     nombre: {
         type: String,
-        required: true
+        required: [true, "El nombre de la categoría es obligatorio"]
     },
     descripcion: {
         type: String,
-        required: true
+        required: [true, "La descripción de la categoría es obligatoria"]
     },
     estado: {
         type: String,
@@ -16,5 +16,5 @@ const schemaCategoria = new mongoose.Schema({
     }
 }, { versionKey: false });
 
-const Categoria = mongoose.model("categoria", schemaCategoria);
+const Categoria = mongoose.model("Categoria", schemaCategoria); // Nombre con mayúscula para convenciones de MongoDB
 module.exports = Categoria;

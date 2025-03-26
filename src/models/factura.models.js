@@ -1,32 +1,33 @@
 const mongoose = require("../config/database");
 const Producto = require("../models/producto.models");
 const Usuario = require("../models/usuario.models");
-const MetodoPago = require("../models/metodo-pago.models")
-const schemaCategoria = new mongoose.Schema({
+const MetodoPago = require("../models/metodo-pago.models");
+
+const schemaFactura = new mongoose.Schema({
     cantidad: {
         type: Number,
-        required: true
+        required: [true, "La cantidad es obligatoria"]
     },
     total: {
         type: mongoose.Types.Decimal128,
-        required: true
+        required: [true, "El total es obligatorio"]
     },
     producto: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'producto',
+        ref: "Producto",  // Se debe usar el nombre exacto del modelo
         required: true
     },
     usuario: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'usuario',
+        ref: "Usuario",
         required: true
     },
     metodoPago: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'metodoPago',
+        ref: "MetodoPago",
         required: true
     }
 }, { versionKey: false });
 
-const Factura = mongoose.model("factura", schemaCategoria);
+const Factura = mongoose.model("Factura", schemaFactura);
 module.exports = Factura;

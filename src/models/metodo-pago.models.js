@@ -1,21 +1,20 @@
 const mongoose = require("../config/database");
-const Categoria = require("../models/categoria.models")
-const schemaProducto = new mongoose.Schema({
-    foto: {
-        type: String,
-        required: true 
-    },
-    
+
+const schemaMetodoPago = new mongoose.Schema({
     nombre: {
         type: String,
-        required: true
+        required: [true, "El nombre del método de pago es obligatorio"]
     },
-    disponibilidad: {
+    descripcion: {
         type: String,
-        enum: ["DISPONIBLE", "NO DISPONIBLE"],
-        default: "DISPONIBLE"
+        required: [true, "La descripción es obligatoria"]
     },
-}, {versionKey: false} )
+    estado: {
+        type: String,
+        enum: ["ACTIVO", "INACTIVO"],
+        default: "ACTIVO"
+    }
+}, { versionKey: false });
 
-const metodoPago = mongoose.model("metodoPago", schemaProducto);
-module.exports = metodoPago;
+const MetodoPago = mongoose.model("MetodoPago", schemaMetodoPago);
+module.exports = MetodoPago;
