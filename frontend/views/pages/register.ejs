@@ -1,7 +1,6 @@
-{% extends 'base2.html' %}
-{% load static %}
-{% block titulo %}Inicio{% endblock %}
-{% block body %} 
+<%-  include('../partials/head') %>
+<body>
+    <%-  include('../partials/navbar') %>
 
 <main>
     <div class="container">
@@ -12,7 +11,7 @@
             <div class="col-md-6">
                 <h1 class="title">Regístrate</h1>
                 <form action="" method="post">
-                    {% csrf_token %}
+         
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" name="nombre" id="nombre" autocomplete="given-name"  
@@ -42,23 +41,16 @@
                     <button type="submit" class="btn-register btn btn-primary">Regístrate</button>
                 </form>
                 <div class="op-login mt-3">
-                    <p>¿Ya tienes una cuenta? <a href="{% url 'login' %}" class="btn-login btn btn-link">Inicia sesión</a></p>
+                    <p>¿Ya tienes una cuenta? <a href="/login" class="btn-login btn btn-link">Inicia sesión</a></p>
                 </div>
             </div>
         </div>
     </div>
 
-    {% if messages %}
-        <div class="alert alert-danger">
-            <ul>
-                {% for message in messages %}
-                    <li>{{ message }}</li>
-                {% endfor %}
-            </ul>
-        </div>
-    {% endif %}
+   
 </main>
-
+<%-  include('../partials/footer') %>
+</body>
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const form = document.querySelector("form");
@@ -72,5 +64,4 @@
         });
     });
 </script>
-
-{% endblock %}
+ 

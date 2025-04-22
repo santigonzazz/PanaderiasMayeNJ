@@ -16,6 +16,34 @@ app.get('/', function(req, res){
     );
 })
 
+app.get('/about', function(req, res){
+    res.render("pages/about")
+})
+
+app.get('/contactanos', function(req, res){
+    res.render("pages/contactanos")
+})
+
+app.get('/carrito', function(req, res){
+    res.render("pages/carrito")
+})
+
+app.get('/facturas', function(req, res){
+    res.render("pages/usuario/facturas")
+})
+
+app.get('/login', function(req, res){
+    res.render("pages/login")
+})
+
+app.get('/register', function(req, res){
+    res.render("pages/register")
+})
+
+app.get('/editar-perfil', function(req, res){
+    res.render("pages/usuario/user-Crud")
+})
+
 app.listen(8000, ()=>{
     console.log(`Servidor en el puerto 8000`)
 })

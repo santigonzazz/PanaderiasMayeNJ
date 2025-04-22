@@ -1,14 +1,13 @@
-{% extends 'base.html' %}
-{% load static %}
-{% block titulo %}Facturas {% endblock %}
-
-{% block body %}
+<%-  include('../../partials/head') %>
 <style>
     .card-factura{
         background-color: antiquewhite;
     }
 </style>
-<main >
+<body>
+    <%-  include('../../partials/navbar') %>
+
+<main>
 <div class="container py-5">   
     <h2 class="mb-4 text-center fw-bold" style="color: #212529;">Mis Facturas</h2>
 
@@ -25,21 +24,20 @@
         </div>
     </form>
 
-    {% for item in facturas_con_totales %}
-        {% with factura=item.factura total=item.total %}
+    
         <div class="card mb-4 shadow-sm border-0 card-factura">
             <div class="card-header p-3 m-4" style="background-color: #f8d775; color: #212529;">
-                <strong>Factura ID: {{ factura.id }}</strong>
+                <strong>Factura ID:  </strong>
             </div>
             <div class="card-body bg-light m-4">
-                <p><strong>Fecha:</strong> {{ factura.fecha|date:"Y-m-d H:i" }}</p>
-                <p><strong>Método de Servicio:</strong> {{ factura.get_meotdo_pago_display }}</p>
+                <p><strong>Fecha:</strong> 22del04d4i2025</p>
+                <p><strong>Método de Servicio:</strong>  efectivo</p>
                 <p><strong>Estado:</strong> 
-                    {% if factura.estado == 2 %}
+      
                         <span class="badge bg-dark text-white">Pagado</span>
-                    {% else %}
+                 
                         <span class="badge bg-secondary">Pendiente</span>
-                    {% endif %}
+                    
                 </p>
 
                 <h5 class="mt-4 mb-3 fw-bold">Productos Comprados:</h5>
@@ -52,16 +50,16 @@
                                 <th>Cantidad</th>
                                 <th>Total</th>
                             </tr>
-                        </thead>
+                        </thead>  
                         <tbody class="text-center">
-                            {% for detalle in factura.detalles.all %}
+                             
                             <tr>
-                                <td>{{ detalle.producto.nombre }}</td>
-                                <td>${{ detalle.producto.precio }}</td>
-                                <td>{{ detalle.cantidad }}</td>
-                                <td>${{ detalle.total }}</td>
+                                <td>nombre del producto    </td>
+                                <td>$precio? 2</td>
+                                <td>cantidad</td>
+                                <td>$</td>
                             </tr>
-                            {% endfor %}
+                            
                         </tbody>
                     </table>
                 </div>
@@ -72,12 +70,11 @@
                 </div>
             </div>
         </div>
-        {% endwith %}
-    {% empty %}
+        
         <div class="alert alert-warning text-center mt-5">
             <p>No hay facturas registradas.</p>
         </div>
-    {% endfor %}
+    
 </div>
 </main>
-{% endblock %}
+</body>

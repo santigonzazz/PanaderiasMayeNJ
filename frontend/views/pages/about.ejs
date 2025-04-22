@@ -1,10 +1,9 @@
-{% extends 'base.html' %}
-{% load static %}
 
-{% block titulo %} About {% endblock %}
+<%-  include('../partials/head') %>
 
-{% block body %}
-<link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+<body>
+    <%-  include('../partials/navbar') %>
 
 <div class="banner-fondo">
     <h1 class="titulo-animacion">NUESTRA TRADICIÓN ES <br> HORNEAR SABROSURA</h1>
@@ -92,4 +91,6 @@
         </div>
     </div>
 </div>
-{% endblock %}
+<%-  include('../partials/footer') %>
+
+</body>
