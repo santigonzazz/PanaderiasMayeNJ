@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block titulo %} About {% endblock %}
+
+{% block body %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+
+<div class="banner-fondo">
+    <h1 class="titulo-animacion">NUESTRA TRADICIÓN ES <br> HORNEAR SABROSURA</h1>
+</div>
+
+<h2 class="title text-center mt-5">Conoce Nuestro Equipo</h2>
+
+<div class="equipo-container">
+    <!-- Columna izquierda -->
+    <div class="columna columna-izquierda">
+        <!-- Tarjeta 1 -->
+        <div class="card-animacion">
+            <div class="card-inner-animacion">
+                <div class="card-front-animacion">
+                    <img src="{% static 'img/mane.jpeg' %}" alt="Manuel Clavijo">
+                </div>
+                <div class="card-back-animacion">
+                    <h5 class="card-title-animacion">Manuel Clavijo</h5>
+                    <p class="card-text-animacion">Programador Full-Stack</p>
+                    <p class="card-text-animacion card-text-bottom">Más de 5 años creando software con pasión y precisión.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta 2 -->
+        <div class="card-animacion">
+            <div class="card-inner-animacion">
+                <div class="card-front-animacion">
+                    <img src="{% static 'img/nicolas.jpg' %}" alt="Nicolas Perez">
+                </div>
+                <div class="card-back-animacion">
+                    <h5 class="card-title-animacion">Nicolas Perez</h5>
+                    <p class="card-text-animacion">Programador Full-Stack</p>
+                    <p class="card-text-animacion card-text-bottom">Especialista en desarrollo web, con más de 2 años de experiencia.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="columna columna-derecha">
+        <!-- Tarjeta 3 -->
+        <div class="card-animacion">
+            <div class="card-inner-animacion">
+                <div class="card-front-animacion">
+                    <img src="{% static 'img/maye.jpeg' %}" alt="Santiago Gonzalez">
+                </div>
+                <div class="card-back-animacion">
+                    <h5 class="card-title-animacion">Santiago Gonzalez</h5>
+                    <p class="card-text-animacion">Líder Técnico</p>
+                    <p class="card-text-animacion card-text-bottom">Enfocado en soluciones eficientes, con experiencia sólida en liderazgo técnico.</p>
+                </div>
+            </div>
+        </div>
+        <!-- Tarjeta 4 -->
+        <div class="card-animacion">
+            <div class="card-inner-animacion">
+                <div class="card-front-animacion">
+                    <img src="{% static 'img/jhony.jpeg' %}" alt="Jhonny Alcalde">
+                </div>
+                <div class="card-back-animacion">
+                    <h5 class="card-title-animacion">Jhonny Alcalde</h5>
+                    <p class="card-text-animacion">Product Manager</p>
+                    <p class="card-text-animacion card-text-bottom">Apasionado por conectar usuarios con productos funcionales y accesibles.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Nuestra visión y misión -->
+<div class="container mt-5 about-section">
+    <h1 class="about-title text-center mb-5">Sobre Nosotros</h1>
+    <div class="about-row">
+        <div class="about-col">
+            <h2 class="about-subtitle">Nuestra Visión</h2>
+            <p>
+                Ser líderes en la creación de soluciones tecnológicas cálidas, útiles y humanas. Soñamos con transformar la relación entre las personas y la tecnología, desde lo simple hasta lo extraordinario.
+            </p>
+        </div>
+        <div class="about-col">
+            <h2 class="about-subtitle">Nuestra Misión</h2>
+            <p>
+                Democratizar la tecnología, acercándola a pequeñas empresas, emprendimientos y comunidades. Creamos software accesible, artesanal y funcional para mejorar la vida de nuestros usuarios.
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

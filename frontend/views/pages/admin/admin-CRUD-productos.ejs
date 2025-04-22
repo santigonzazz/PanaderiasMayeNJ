@@ -1,0 +1,171 @@
+
+
+<div class="container mt-5">
+    <h1 class="text-center">ADMIN CRUD PRODUCTOS</h1>
+
+    <div class="row mb-4 form-center">
+        <div class="col-md-6 offset-md-3">
+            <h1 class="title">Añadir nuevo Producto</h1>
+            <form class="form-user" method="post" action="#"
+                onsubmit="return validarFormulario()" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="name" class="form-label">Nombre:</label>
+                    <input type="text" class="form-control" id="name" name="nombre" required pattern="[A-Za-zñÑ\s]{2,}">
+                </div>
+                <div>
+                    <label for="celular" class="form-label">Cantidad:</label>
+                    <input type="number" class="form-control" id="precio" name="precio" required min="0" pattern="[0-9]{10}">
+               </div> 
+                <div class="mb-3">
+                    <label for="apellido" class="form-label">Descripción:</label>
+                    <input type="text" class="form-control" id="descripcion" name="descripcion" required>
+                </div>
+                <div class="mb-3 form-acomodado">
+                    
+                    <div>
+                        <label for="celular" class="form-label">Precio:</label>
+                        <input type="number" class="form-control" id="precio" name="precio" required min="0" step="0.01"
+                        title="Se solicita tener 10 digitos como minimo">
+                   </div> 
+                    <div>
+                        <label for="rol" class="form-label">Disponibilidad:</label>
+                        <select name="disponibilidad" class="form-select" required>
+                            <option value="">Seleccione</option>
+                            <option value="SI">Disponible</option>
+                            <option value="NO">No Disponible</option>
+                        </select>
+                    </div>       
+                </div>
+                <div class="mb-3">
+                    <label for="rol" class="form-label">Categorías:</label>
+                    <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="categorias" value="{{ i.id }}" id="categoria{{ i.id }}" min="1">
+                                <label class="form-check-label" for="categoria{{ i.id }}">
+                                </label>
+                            </div>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="img" class="form-label">Seleccione la imagen (jpg, png)</label>
+                    <input type="file" class="form-control" name="foto" accept="image/*" required min="1">
+                </div>
+                
+                <button type="submit" class="btn-create btn btn-primary">Crear Producto</button>
+            </form>
+        </div>
+    </div>
+    <br><br>
+    <!-- Tabla de Productos -->
+    <table class="table">
+        <thead>
+            <tr class="Cabezal_Tabla">
+                <th>Imagen</th>
+                <th>id</th>
+                <th>Nombre</th>
+                <th>Stock</th>
+                <th>Precio</th>
+                <th>Disponibilidad</th>
+                <th>Categoria</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+
+                <td>
+                    <img src="#" style="width: 50px; height: 50px;">
+                </td>
+                <td>{{ producto.id }}</td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{ producto.cantidad }}</td>
+                <td>${{ producto.precio }}</td>
+                <td>
+                    <!-- Mostrar todas las categorías asociadas -->
+                </td>
+                <td>
+                </td>
+                <td>
+                    <button class="btn btn-warning" data-bs-toggle="modal"
+                        data-bs-target="#updateModal{{ producto.id }}">
+                        Editar
+                    </button>
+                    <a href="#" class="btn btn-danger"
+                        onclick="return confirm('¿Seguro que quieres eliminar este producto?')">
+                        Eliminar
+                    </a>
+
+                </td>
+
+                <!-- Modal de Edición -->
+                <div class="modal fade" id="updateModal{{ producto.id }}" tabindex="-1"
+                    aria-labelledby="updateModalLabel{{ producto.id }}" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="updateModalLabel{{ producto.id }}">Editar Producto</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                            <form class="form-user" method="post" action="#"
+                                onsubmit="return validarFormulario()" enctype="multipart/form-data">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nombre:</label>
+                                    <input type="text" class="form-control" id="name" name="nombre" required pattern="[A-Za-zñÑ\s]{2,}" value="{{ producto.nombre }}">
+                                </div>
+                                <div>
+                                    <label for="celular" class="form-label">Stock:</label>
+                                    <input type="number" class="form-control" id="precio" name="precio" required min="0" pattern="[0-9]{10}" value="{{ producto.cantidad }}">
+                                </div> 
+                                <div class="mb-3">
+                                    <label for="apellido" class="form-label">Descripción:</label>
+                                    <input type="text" class="form-control" id="descripcion" name="descripcion" value="{{ producto.descripcion }}" required>
+                                </div>
+                                <div class="mb-3 form-acomodado">
+                                    
+                                    <div>
+                                        <label for="celular" class="form-label">Precio:</label>
+                                        <input type="number" class="form-control" id="precio" name="precio" required min="0" step="0.01"
+                                        title="Se solicita tener 10 digitos como minimo" pattern="[A-Za-z ]{2,}" value="{{ producto.precio }}" required>
+                                   </div> 
+                                    <div>
+                                        <label for="rol" class="form-label">Disponibilidad:</label>
+                                        <select name="disponibilidad" class="form-select" value="{{ producto.precio }}" required>
+                                            <option value="">Seleccione</option>
+                                            <option value="SI">Disponible</option>
+                                            <option value="NO">No Disponible</option>
+                                        </select>
+                                    </div>       
+                                </div>
+                                <div class="mb-3">
+                                    <label for="rol" class="form-label">Categorías:</label>
+                                    <div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" name="categorias" value="{{ i.id }}" id="categoria{{ i.id }}">
+                                                <label class="form-check-label" for="categoria{{ i.id }}">
+                                                </label>
+                                            </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="img" class="form-label">Seleccione la imagen (jpg, png)</label>
+                                    <input type="file" class="form-control" name="foto" accept="image/*">
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary">Actualizar Producto</button>
+                            </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </tr>
+            <tr>
+                <td colspan="6" class="text-center">No hay productos disponibles.</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>

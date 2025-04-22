@@ -1,0 +1,157 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %} Admin-Crudn {% endblock %}
+
+{% block body %}
+<main>
+    <div class="container mt-5">
+        <h1 class="title text-center">ADMIN CRUD USUARIOS</h1>
+
+        <!-- Create Form -->
+        <div class="row mb-4 form-center">
+            <div class="col-md-6 offset-md-3">
+                <h2 class="title text-center">Añadir nuevo Usuario</h2>
+                <form class="form-user" method="post" action="{% url 'crear_usuario_admin' %}">
+                    {% csrf_token %}
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre:</label>
+                        <input type="text" class="form-control" id="name" name="nombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]{2,}" title="Solo letras, mínimo 2 caracteres.">
+                    </div>
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido:</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido" required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]{2,}" title="Solo letras, mínimo 2 caracteres.">
+                    </div>
+                    <div class="mb-3">
+                        <label for="rol" class="form-label">Rol:</label>
+                        <select name="rol" class="form-select" required>
+                            <option value="">Seleccione</option>
+                            <option value="2">Cliente</option>
+                            <option value="1">Empleado</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="celular" class="form-label">Celular:</label>
+                        <input type="text" class="form-control" id="celular" name="celular" required pattern="^\d{10}$" title="Debe tener exactamente 10 dígitos.">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo:</label>
+                        <input type="email" class="form-control" id="correo" name="email" required placeholder="example@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="clave" class="form-label">Clave:</label>
+                        <input type="password" class="form-control" id="clave" name="password" required minlength="8">
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmar_clave" class="form-label">Confirmar clave:</label>
+                        <input type="password" class="form-control" id="confirmar_clave" name="confirmar_password" required>
+                    </div>
+                    <button type="submit" class="btn-create btn btn-primary">Añadir Usuario</button>
+                </form>
+            </div>
+        </div>
+
+        {% if messages %}
+            <div class="alert alert-info mt-3">
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Tabla de usuarios -->
+        <table class="table mt-4">
+            <thead>
+                <tr class="Cabezal_Tabla">
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Rol</th>
+                    <th>Celular</th>
+                    <th>Correo</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for usuario in usuarios %}
+                <tr>
+                    <td>{{ usuario.nombre }}</td>
+                    <td>{{ usuario.apellido }}</td>
+                    <td>{{ usuario.get_rol_display }}</td>
+                    <td>{{ usuario.celular }}</td>
+                    <td>{{ usuario.email }}</td>
+                    <td>
+                        <a href="#" class="btn btn-info"
+                           data-bs-toggle="modal"
+                           data-bs-target="#updateModal"
+                           onclick="cargarDatosUsuario('{{ usuario.id }}', '{{ usuario.nombre }}', '{{ usuario.apellido }}', '{{ usuario.rol }}', '{{ usuario.celular }}', '{{ usuario.email }}')">Editar</a>
+                           <a href="{% url 'eliminar_usuario_admin' usuario.id %}" class="btn btn-danger"
+                           onclick="return confirm('¿Seguro que quieres eliminar este usuario?')">Eliminar</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr><td colspan="6" class="text-center">No hay usuarios registrados.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <!-- Modal de actualización -->
+        <div class="modal fade" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form id="updateUserForm" method="post">
+                        {% csrf_token %}
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="updateModalLabel">Actualizar Usuario</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input type="hidden" id="updateUserId" name="id">
+                            <div class="mb-3">
+                                <label for="updateItemName" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="updateItemName" name="nombre" required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]{2,}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateItemApellido" class="form-label">Apellido</label>
+                                <input type="text" class="form-control" id="updateItemApellido" name="apellido" required pattern="[A-Za-zÁÉÍÓÚáéíóúñÑ ]{2,}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateItemRol" class="form-label">Rol:</label>
+                                <select name="rol" id="updateItemRol" class="form-select" required>
+                                    <option value="">Seleccione</option>
+                                    <option value="2">Cliente</option>
+                                    <option value="1">Empleado</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="updateItemCelular" class="form-label">Celular</label>
+                                <input type="text" class="form-control" id="updateItemCelular" name="celular" required pattern="^\d{10}$">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<script>
+
+
+    // Función para cargar los datos del usuario en el modal de actualización
+
+    function cargarDatosUsuario(id, nombre, apellido, rol, celular, email) {
+        document.getElementById("updateUserId").value = id;
+        document.getElementById("updateItemName").value = nombre;
+        document.getElementById("updateItemApellido").value = apellido;
+        document.getElementById("updateItemRol").value = rol;
+        document.getElementById("updateItemCelular").value = celular;
+        document.getElementById("updateUserForm").action = `/editar_usuario_admin/${id}/`;
+
+    }
+</script>
+{% endblock %}
+
