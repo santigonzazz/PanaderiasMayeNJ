@@ -1,6 +1,7 @@
 const express = require('express');
 require('dotenv').config()
 const app = express()
+// const enrutador = require('./routes/router');
 const path = require('path')
 
 app.set("view engine", "ejs");
@@ -44,6 +45,6 @@ app.get('/editar-perfil', function(req, res){
     res.render("pages/usuario/user-Crud")
 })
 
-app.listen(8000, ()=>{
+app.listen(8003, ()=>{
     console.log(`Servidor en el puerto 8000`)
 })
