@@ -4,10 +4,14 @@ const app = express()
 // const enrutador = require('./routes/router');
 const path = require('path')
 
+const enrutador = require('./routes/router')
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "/frontend/views"));
 app.use('/static', express.static(path.join(__dirname, 'frontend/static')));
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
+app.use('/v1', enrutador)
 
 
 app.get('/', function(req, res){
@@ -45,6 +49,6 @@ app.get('/editar-perfil', function(req, res){
     res.render("pages/usuario/user-Crud")
 })
 
-app.listen(8003, ()=>{
-    console.log(`Servidor en el puerto 8000`)
+app.listen(process.env.PORT, ()=>{
+    console.log(`Servidor en el puerto ${process.env.PORT}`)
 })
